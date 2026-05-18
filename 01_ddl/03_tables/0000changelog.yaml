@@ -44,3 +44,18 @@ databaseChangeLog:
             path: ../../05_rollbacks/01_ddl/03_tables/003_create_distribution_tables.rollback.sql
             relativeToChangelogFile: true
             stripComments: false
+  - changeSet:
+      id: 6f2b8c3d-4e5f-6g7h-8i9j-0k1l2m3n4o5p
+      author: mvale
+      labels: "HU-07-dev,ddl,inventory,core"
+      comment: "Creates inventory tables in inventory schema: provider, product, service, product_tracking, and inventory_availability."
+      changes:
+        - sqlFile:
+            path: 004_create_inventory_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/004_create_inventory_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
