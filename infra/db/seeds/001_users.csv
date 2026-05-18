@@ -1,0 +1,3 @@
+username,password,permissions
+ariel5253,ariel5253,ddl;dml
+app_readonly,app_readonly_default_password,ro
