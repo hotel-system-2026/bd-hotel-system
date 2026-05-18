@@ -29,3 +29,18 @@ databaseChangeLog:
             path: ../../05_rollbacks/01_ddl/03_tables/002_create_parameterization_tables.rollback.sql
             relativeToChangelogFile: true
             stripComments: false
+  - changeSet:
+      id: 5e1a9b2c-3d4e-4f5g-6h7i-8j9k0l1m2n3o
+      author: mvale
+      labels: "HU-06-dev,ddl,distribution,core"
+      comment: "Creates distribution tables in distribution schema: room_type, room_status, branch, and room."
+      changes:
+        - sqlFile:
+            path: 003_create_distribution_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/003_create_distribution_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
