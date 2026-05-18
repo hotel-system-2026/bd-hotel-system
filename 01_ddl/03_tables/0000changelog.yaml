@@ -1,1 +1,16 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: 3c8f2a1d-4b9c-5e7f-8a2b-9d1c0f6e7a3b
+      author: mvale
+      labels: "HU-04-dev,ddl,security,core"
+      comment: "Creates security module base tables in security schema: person, role, permission, module, user, view, user_role, role_permission, module_view."
+      changes:
+        - sqlFile:
+            path: 001_create_security_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/001_create_security_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
