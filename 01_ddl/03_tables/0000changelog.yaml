@@ -14,3 +14,18 @@ databaseChangeLog:
             path: ../../05_rollbacks/01_ddl/03_tables/001_create_security_tables.rollback.sql
             relativeToChangelogFile: true
             stripComments: false
+  - changeSet:
+      id: 7d2f0e6b-2c3c-4a2f-8d12-5d3b2d6b7c10
+      author: mvale
+      labels: "HU-05-dev,ddl,parameterization,core"
+      comment: "Creates parameterization tables in parameterization schema: client, company, legal_information, day_type, payment_method, price, and employee."
+      changes:
+        - sqlFile:
+            path: 002_create_parameterization_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/002_create_parameterization_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
