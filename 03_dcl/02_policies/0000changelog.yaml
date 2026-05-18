@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: security-validation-001
+      author: system
+      description: Validate security configuration and permissions
+      sqlFile:
+        path: 001_security_validation.sql
+        relativeToChangelogFile: true
+      runAlways: true
