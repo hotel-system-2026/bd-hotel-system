@@ -59,3 +59,18 @@ databaseChangeLog:
             path: ../../05_rollbacks/01_ddl/03_tables/004_create_inventory_tables.rollback.sql
             relativeToChangelogFile: true
             stripComments: false
+  - changeSet:
+      id: a1b2c3d4-e5f6-4789-9abc-def012345678
+      author: mvale
+      labels: "HU-08-dev,ddl,service_provision,core"
+      comment: "Creates service provision tables in service_provision schema: room reservation, cancellation, availability, catalog, check-in, check-out, stay, product sale, and service sale."
+      changes:
+        - sqlFile:
+            path: 005_create_service_provision_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/005_create_service_provision_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
