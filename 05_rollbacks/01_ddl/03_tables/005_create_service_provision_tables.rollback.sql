@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS service_provision.service_sale;
+DROP TABLE IF EXISTS service_provision.product_sale;
+DROP TABLE IF EXISTS service_provision.check_out;
+DROP TABLE IF EXISTS service_provision.stay;
+DROP TABLE IF EXISTS service_provision.check_in;
+DROP TABLE IF EXISTS service_provision.room_catalog;
+DROP TABLE IF EXISTS service_provision.room_availability;
+DROP TABLE IF EXISTS service_provision.room_cancellation;
+DROP TABLE IF EXISTS service_provision.room_reservation;
