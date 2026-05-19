@@ -3,21 +3,21 @@
 
 -- 1. Verify bootstrap_admin_socket exists and is superuser
 SELECT 
-  usename,
-  usesuper,
-  usecreatedb,
-  usecreaterole
-FROM pg_user
-WHERE usename = 'bootstrap_admin_socket';
+  rolname,
+  rolsuper,
+  rolcreatedb,
+  rolcreaterole
+FROM pg_roles
+WHERE rolname = 'bootstrap_admin_socket';
 
 -- 2. Verify ariel5253 exists and is not superuser
 SELECT 
-  usename,
-  usesuper,
-  usecreatedb,
-  usecreaterole
-FROM pg_user
-WHERE usename = 'ariel5253';
+  rolname,
+  rolsuper,
+  rolcreatedb,
+  rolcreaterole
+FROM pg_roles
+WHERE rolname = 'ariel5253';
 
 -- 3. Verify role hierarchy
 SELECT 
@@ -50,24 +50,15 @@ WHERE rolname = 'ariel5253';
 
 -- 6. Verify current default privileges
 SELECT 
-  schemaname,
-  tablename,
-  grantor,
-  grantee,
-  privilege_type
-FROM (
-  SELECT 
-    n.nspname as schemaname,
-    t.tablename,
-    'bootstrap_admin_socket' as grantor,
-    'ro_role' as grantee,
-    'SELECT'::text as privilege_type
-  UNION ALL
-  SELECT 
-    n.nspname,
-    t.tablename,
-    'bootstrap_admin_socket',
-    'rw_role',
-    'SELECT'::text
-) perms
-LIMIT 10;
+  NULL::text as schemaname,
+  NULL::text as tablename,
+  'bootstrap_admin_socket' as grantor,
+  'ro_role' as grantee,
+  'SELECT'::text as privilege_type
+UNION ALL
+SELECT 
+  NULL::text,
+  NULL::text,
+  'bootstrap_admin_socket',
+  'rw_role',
+  'SELECT'::text;

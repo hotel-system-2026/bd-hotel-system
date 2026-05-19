@@ -25,8 +25,7 @@ REVOKE ALL PRIVILEGES ON DATABASE hotel_system FROM ariel5253;
 GRANT CONNECT, TEMPORARY ON DATABASE hotel_system TO ariel5253;
 
 -- Prevent schema modification
-ALTER DEFAULT PRIVILEGES FOR USER bootstrap_admin_socket IN SCHEMA public
-  GRANT USAGE ON SCHEMAS TO ariel5253;
+GRANT USAGE ON SCHEMA public TO ariel5253;
 
 -- Allow sequence usage for RW operations
 ALTER DEFAULT PRIVILEGES FOR ROLE bootstrap_admin_socket
@@ -42,7 +41,7 @@ REVOKE TRUNCATE ON ALL TABLES IN SCHEMA public FROM ariel5253;
 -- Create policy: ariel5253 cannot create or modify roles
 -- This is enforced through REVOKE CREATEROLE, which was already done
 -- Additional safeguard: prevent ALTER/DROP of other users
-REVOKE ALL ON postgres FROM ariel5253;
+REVOKE ALL PRIVILEGES ON DATABASE postgres FROM ariel5253;
 
 -- Grant SELECT on system catalogs for inspection but not modification
 GRANT SELECT ON pg_catalog.pg_user TO ariel5253;

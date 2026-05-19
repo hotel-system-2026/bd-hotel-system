@@ -140,8 +140,7 @@ CREATE TABLE security.user_role (
     deleted_by VARCHAR(100),
     deleted_at TIMESTAMPTZ,
     status VARCHAR(20) DEFAULT 'active' NOT NULL,
-    CONSTRAINT user_role_status_check CHECK (status IN ('active', 'inactive', 'deleted')),
-    CONSTRAINT unique_user_role UNIQUE(user_id, role_id) WHERE status != 'deleted'
+    CONSTRAINT user_role_status_check CHECK (status IN ('active', 'inactive', 'deleted'))
 );
 
 -- ==============================================
@@ -159,8 +158,7 @@ CREATE TABLE security.role_permission (
     deleted_by VARCHAR(100),
     deleted_at TIMESTAMPTZ,
     status VARCHAR(20) DEFAULT 'active' NOT NULL,
-    CONSTRAINT role_permission_status_check CHECK (status IN ('active', 'inactive', 'deleted')),
-    CONSTRAINT unique_role_permission UNIQUE(role_id, permission_id) WHERE status != 'deleted'
+    CONSTRAINT role_permission_status_check CHECK (status IN ('active', 'inactive', 'deleted'))
 );
 
 -- ==============================================
@@ -178,6 +176,9 @@ CREATE TABLE security.module_view (
     deleted_by VARCHAR(100),
     deleted_at TIMESTAMPTZ,
     status VARCHAR(20) DEFAULT 'active' NOT NULL,
-    CONSTRAINT module_view_status_check CHECK (status IN ('active', 'inactive', 'deleted')),
-    CONSTRAINT unique_module_view UNIQUE(module_id, view_id) WHERE status != 'deleted'
+    CONSTRAINT module_view_status_check CHECK (status IN ('active', 'inactive', 'deleted'))
 );
+CREATE UNIQUE INDEX idx_user_role_active ON security.user_role (user_id, role_id) WHERE status != 'deleted';
+CREATE UNIQUE INDEX idx_role_permission_active ON security.role_permission (role_id, permission_id) WHERE status != 'deleted';
+CREATE UNIQUE INDEX idx_module_view_active ON security.module_view (module_id, view_id) WHERE status != 'deleted';
+

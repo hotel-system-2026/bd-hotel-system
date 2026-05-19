@@ -7,13 +7,23 @@
 -- Create user: ariel5253
 -- Permissions: ro_role, rw_role (DDL/DML)
 -- Restrictions: Cannot drop databases, cannot create/alter other users
-CREATE ROLE ariel5253 WITH
-  LOGIN
-  CREATEDB
-  INHERIT
-  NOCREATEROLE
-  NOREPLICATION
-  CONNECTION LIMIT 10;
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = 'ariel5253'
+  ) THEN
+    CREATE ROLE ariel5253 WITH
+      LOGIN
+      CREATEDB
+      INHERIT
+      NOCREATEROLE
+      NOREPLICATION
+      CONNECTION LIMIT 10;
+  END IF;
+END
+$$;
 
 ALTER ROLE ariel5253 WITH PASSWORD 'ariel5253';
 
@@ -27,18 +37,28 @@ ALTER ROLE ariel5253 SET search_path = public;
 COMMENT ON ROLE ariel5253 IS 'Application user with DDL and DML permissions. Cannot create or modify other users. Access limited to specific schemas and tables.';
 
 -- Revoke dangerous permissions
-REVOKE CREATEROLE FROM ariel5253;
+ALTER ROLE ariel5253 NOCREATEROLE;
 
 -- ============================================================
 -- Create user: app_readonly
 -- Permissions: ro_role
 -- Restrictions: Read-only access only
-CREATE ROLE app_readonly WITH
-  LOGIN
-  INHERIT
-  NOCREATEROLE
-  NOREPLICATION
-  CONNECTION LIMIT 20;
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = 'app_readonly'
+  ) THEN
+    CREATE ROLE app_readonly WITH
+      LOGIN
+      INHERIT
+      NOCREATEROLE
+      NOREPLICATION
+      CONNECTION LIMIT 20;
+  END IF;
+END
+$$;
 
 ALTER ROLE app_readonly WITH PASSWORD 'app_readonly_default_password';
 
@@ -51,4 +71,4 @@ ALTER ROLE app_readonly SET search_path = public;
 COMMENT ON ROLE app_readonly IS 'Read-only application role. Use for reporting and analytics applications. Cannot modify any data.';
 
 -- Revoke dangerous permissions
-REVOKE CREATEROLE FROM app_readonly;
+ALTER ROLE app_readonly NOCREATEROLE;

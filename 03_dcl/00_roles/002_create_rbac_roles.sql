@@ -33,11 +33,10 @@ ALTER DEFAULT PRIVILEGES
 
 -- Grant SELECT on all future views
 ALTER DEFAULT PRIVILEGES
-  GRANT SELECT ON VIEWS TO ro_role;
+  GRANT SELECT ON TABLES TO ro_role;
 
 -- Grant USAGE on all future schemas
-ALTER DEFAULT PRIVILEGES
-  GRANT USAGE ON SCHEMAS TO ro_role;
+GRANT USAGE ON SCHEMA public TO ro_role;
 
 -- Default privileges for RW role
 -- Grant SELECT, INSERT, UPDATE on all future tables
@@ -46,11 +45,10 @@ ALTER DEFAULT PRIVILEGES
 
 -- Grant SELECT on all future views
 ALTER DEFAULT PRIVILEGES
-  GRANT SELECT ON VIEWS TO rw_role;
+  GRANT SELECT ON TABLES TO rw_role;
 
 -- Grant USAGE on all future schemas
-ALTER DEFAULT PRIVILEGES
-  GRANT USAGE ON SCHEMAS TO rw_role;
+GRANT USAGE ON SCHEMA public TO rw_role;
 
 -- Allow RW to use sequences
 ALTER DEFAULT PRIVILEGES
