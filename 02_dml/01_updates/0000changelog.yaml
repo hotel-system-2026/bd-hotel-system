@@ -1,1 +1,121 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: 1a2b3c4d-5e6f-4789-9abc-000000000001
+      author: mvale
+      labels: "ddl,updates,security"
+      comment: "Adds foreign key constraints for security module tables."
+      changes:
+        - sqlFile:
+            path: 001_create_security_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/001_create_security_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 2a2b3c4d-5e6f-4789-9abc-000000000002
+      author: mvale
+      labels: "ddl,updates,parameterization"
+      comment: "Adds foreign key constraints for parameterization module."
+      changes:
+        - sqlFile:
+            path: 002_create_parameterization_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/002_create_parameterization_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 3a2b3c4d-5e6f-4789-9abc-000000000003
+      author: mvale
+      labels: "ddl,updates,distribution"
+      comment: "Adds foreign key constraints for distribution module."
+      changes:
+        - sqlFile:
+            path: 003_create_distribution_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/003_create_distribution_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 4a2b3c4d-5e6f-4789-9abc-000000000004
+      author: mvale
+      labels: "ddl,updates,inventory"
+      comment: "Adds foreign key constraints for inventory module."
+      changes:
+        - sqlFile:
+            path: 004_create_inventory_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/004_create_inventory_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 5a2b3c4d-5e6f-4789-9abc-000000000005
+      author: mvale
+      labels: "ddl,updates,service_provision"
+      comment: "Adds foreign key constraints for service_provision module."
+      changes:
+        - sqlFile:
+            path: 005_create_service_provision_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/005_create_service_provision_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 6a2b3c4d-5e6f-4789-9abc-000000000006
+      author: mvale
+      labels: "ddl,updates,bill"
+      comment: "Adds foreign key constraints for bill module."
+      changes:
+        - sqlFile:
+            path: 006_create_bill_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/006_create_bill_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 7a2b3c4d-5e6f-4789-9abc-000000000007
+      author: mvale
+      labels: "ddl,updates,notification"
+      comment: "Adds foreign key constraints for notification module."
+      changes:
+        - sqlFile:
+            path: 007_create_notification_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/007_create_notification_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 8a2b3c4d-5e6f-4789-9abc-000000000008
+      author: mvale
+      labels: "ddl,updates,maintenance"
+      comment: "Adds foreign key constraints for maintenance module."
+      changes:
+        - sqlFile:
+            path: 008_create_maintenance_fks.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../../05_rollbacks/02_dml/01_updates/008_create_maintenance_fks.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false

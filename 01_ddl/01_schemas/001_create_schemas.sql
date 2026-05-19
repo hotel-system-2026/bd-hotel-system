@@ -6,5 +6,3 @@ CREATE SCHEMA IF NOT EXISTS inventory;
 CREATE SCHEMA IF NOT EXISTS notification;
 CREATE SCHEMA IF NOT EXISTS security;
 CREATE SCHEMA IF NOT EXISTS maintenance;
-
-parameterization, distribution, service_provision, bill, inventory, notification, security, maintenance;

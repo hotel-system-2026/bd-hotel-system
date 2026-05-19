@@ -85,6 +85,9 @@ CREATE TABLE distribution.room (
     deleted_at TIMESTAMPTZ,
     status VARCHAR(20) DEFAULT 'active' NOT NULL,
     CONSTRAINT room_status_check CHECK (status IN ('active', 'inactive', 'deleted')),
-    CONSTRAINT room_capacity_check CHECK (capacity > 0),
-    CONSTRAINT unique_room_per_branch UNIQUE(branch_id, number) WHERE status != 'deleted'
+    CONSTRAINT room_capacity_check CHECK (capacity > 0)
 );
+
+CREATE UNIQUE INDEX idx_room_unique_per_branch
+    ON distribution.room (branch_id, number)
+    WHERE status != 'deleted';

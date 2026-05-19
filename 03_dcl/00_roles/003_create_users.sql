@@ -5,15 +5,25 @@
 -- Create user: ariel5253
 -- Permissions: DDL (Data Definition Language) and DML (Data Manipulation Language)
 -- Restrictions: Cannot drop databases, cannot alter/drop other users, limited CREATEDB
-CREATE ROLE ariel5253 WITH
-  LOGIN
-  CREATEDB
-  INHERIT
-  NOCREATEROLE
-  NOREPLICATION
-  BYPASSRLS
-  VALID UNTIL 'infinity'
-  CONNECTION LIMIT 10;
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = 'ariel5253'
+  ) THEN
+    CREATE ROLE ariel5253 WITH
+      LOGIN
+      CREATEDB
+      INHERIT
+      NOCREATEROLE
+      NOREPLICATION
+      BYPASSRLS
+      VALID UNTIL 'infinity'
+      CONNECTION LIMIT 10;
+  END IF;
+END
+$$;
 
 -- Set password for ariel5253
 -- IMPORTANT: Change this password in production
@@ -32,16 +42,26 @@ COMMENT ON ROLE ariel5253 IS 'Application user with DDL and DML permissions. Can
 
 -- Revoke dangerous permissions
 -- ariel5253 cannot create roles or superusers
-REVOKE CREATEROLE FROM ariel5253;
+ALTER ROLE ariel5253 NOCREATEROLE;
 
 -- Optional: Create additional application user with RO-only permissions
 -- This is a template for read-only application users
-CREATE ROLE app_readonly WITH
-  LOGIN
-  INHERIT
-  NOCREATEROLE
-  NOREPLICATION
-  CONNECTION LIMIT 20;
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = 'app_readonly'
+  ) THEN
+    CREATE ROLE app_readonly WITH
+      LOGIN
+      INHERIT
+      NOCREATEROLE
+      NOREPLICATION
+      CONNECTION LIMIT 20;
+  END IF;
+END
+$$;
 
 ALTER ROLE app_readonly WITH PASSWORD 'app_readonly_default_password';
 GRANT ro_role TO app_readonly;

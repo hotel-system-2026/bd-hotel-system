@@ -15,16 +15,26 @@ CREATE ROLE bootstrap_admin WITH
 
 -- Create a dedicated connection role for socket-based connections
 -- This is the actual role that will connect via socket
-CREATE ROLE bootstrap_admin_socket WITH
-  LOGIN
-  SUPERUSER
-  CREATEDB
-  CREATEROLE
-  INHERIT
-  REPLICATION
-  BYPASSRLS
-  VALID UNTIL 'infinity'
-  CONNECTION LIMIT 5;
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM pg_roles
+    WHERE rolname = 'bootstrap_admin_socket'
+  ) THEN
+    CREATE ROLE bootstrap_admin_socket WITH
+      LOGIN
+      SUPERUSER
+      CREATEDB
+      CREATEROLE
+      INHERIT
+      REPLICATION
+      BYPASSRLS
+      VALID UNTIL 'infinity'
+      CONNECTION LIMIT 5;
+  END IF;
+END
+$$;
 
 -- Set password for bootstrap socket admin
 -- IMPORTANT: Change this password in production
