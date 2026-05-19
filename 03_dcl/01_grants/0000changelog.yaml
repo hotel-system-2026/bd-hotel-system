@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: rbac-grants-001
+      author: system
+      description: Apply RBAC grants and restrict dangerous operations
+      sqlFile:
+        path: 001_rbac_grants.sql
+        relativeToChangelogFile: true
+      runAlways: false

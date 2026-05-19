@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: bootstrap-admin-001
+      author: system
+      description: Create bootstrap administrator with socket-only access
+      sqlFile:
+        path: 001_bootstrap_admin.sql
+        relativeToChangelogFile: true
+      runAlways: false
+  - changeSet:
+      id: rbac-roles-002
+      author: system
+      description: Create base RBAC roles (ro_role, rw_role, admin_role)
+      sqlFile:
+        path: 002_create_rbac_roles.sql
+        relativeToChangelogFile: true
+      runAlways: false
+  - changeSet:
+      id: create-users-003
+      author: system
+      description: Create application users with restricted permissions
+      sqlFile:
+        path: 003_create_users.sql
+        relativeToChangelogFile: true
+      runAlways: false
+  - changeSet:
+      id: create-users-from-csv-004
+      author: system
+      description: Create users dynamically from CSV configuration
+      sqlFile:
+        path: 004_create_users_from_csv.sql
+        relativeToChangelogFile: true
+      runAlways: false
