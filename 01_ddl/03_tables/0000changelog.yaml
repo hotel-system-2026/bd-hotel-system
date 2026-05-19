@@ -104,3 +104,18 @@ databaseChangeLog:
             path: ../../05_rollbacks/01_ddl/03_tables/007_create_notification_tables.rollback.sql
             relativeToChangelogFile: true
             stripComments: false
+  - changeSet:
+      id: d4e5f6a7-b8c9-4a01-bcde-f123456789ab
+      author: mvale
+      labels: "HU-11-dev,ddl,maintenance,core"
+      comment: "Creates maintenance tables in maintenance schema: room_maintenance, maintenance_usage, maintenance_remodeling, and maintenance_dashboard."
+      changes:
+        - sqlFile:
+            path: 008_create_maintenance_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/008_create_maintenance_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
