@@ -1,0 +1,73 @@
+Starting seeds load: canonical -> volumetric -> smoke test
+Applying seed: 001_canonical_seeds.sql
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+Applying seed: 001_reference_data.sql
+Applying seed: 002_volumetric_seeds.sql
+INSERT 0 0
+DO
+Applying seed: 003_distribution_seeds.sql
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+Applying seed: 004_parameterization_canonical.sql
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+ERROR:  syntax error at or near "CROSS"
+LINE 7:     CROSS JOIN parameterization.day_type dt LIMIT 1
+            ^
+Applying seed: 005_parameterization_volumetric.sql
+INSERT 0 0
+Applying seed: 006_service_provision_canonical.sql
+ERROR:  syntax error at or near "WHERE"
+LINE 7:     WHERE NOT EXISTS (SELECT 1 FROM service_provision.catalo...
+            ^
+Applying seed: 007_service_provision_volumetric.sql
+ERROR:  column "habitacion_id" of relation "room_reservation" does not exist
+LINE 1: ...ervice_provision.room_reservation (id, client_id, habitacion...
+                                                             ^
+QUERY:  INSERT INTO service_provision.room_reservation (id, client_id, habitacion_id, start_date, end_date, persons, status, created_by)
+    SELECT gen_random_uuid(), c.id, r.id, CURRENT_DATE + (gs % 30), CURRENT_DATE + (gs % 30) + 2, 2, 'booked', 'seed'
+    FROM generate_series(1,500) gs
+    CROSS JOIN LATERAL (SELECT id FROM parameterization.client LIMIT 1 OFFSET (gs % (SELECT count(*) FROM parameterization.client)) ) c
+    CROSS JOIN LATERAL (SELECT id FROM distribution.room LIMIT 1 OFFSET (gs % (SELECT count(*) FROM distribution.room)) ) r
+    WHERE NOT EXISTS (SELECT 1 FROM service_provision.room_reservation rr WHERE rr.client_id = c.id LIMIT 1)
+CONTEXT:  PL/pgSQL function inline_code_block line 4 at SQL statement
+Applying seed: 008_billing_canonical.sql
+ERROR:  syntax error at or near "WHERE"
+LINE 7:     WHERE NOT EXISTS (SELECT 1 FROM bill.pre_invoice);
+            ^
+Applying seed: 009_inventory_canonical.sql
+INSERT 0 0
+ERROR:  syntax error at or near "WHERE"
+LINE 7:     WHERE NOT EXISTS (SELECT 1 FROM inventory.product WHERE ...
+            ^
+Applying seed: 010_inventory_volumetric.sql
+DO
+Applying seed: 011_notification_canonical.sql
+ERROR:  column "titulo" of relation "promotion" does not exist
+LINE 1: INSERT INTO notification.promotion (id, titulo, descripcion,...
+                                                ^
+Applying seed: 012_security_canonical.sql
+INSERT 0 0
+DO
+Applying seed: 013_maintenance_canonical.sql
+ERROR:  syntax error at or near "WHERE"
+LINE 7:     WHERE NOT EXISTS (SELECT 1 FROM maintenance.mantenimient...
+            ^
+Running smoke test...
+ERROR:  Smoke test failure: expected >=1 product, found 0
+CONTEXT:  PL/pgSQL function inline_code_block line 39 at RAISE
+Seeds loaded and smoke test passed

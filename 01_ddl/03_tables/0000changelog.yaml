@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3c8f2a1d-4b9c-5e7f-8a2b-9d1c0f6e7a3b
+      author: mvale
+      labels: "HU-04-dev,ddl,security,core"
+      comment: "Creates security module base tables in security schema: person, role, permission, module, user, view, user_role, role_permission, module_view."
+      changes:
+        - sqlFile:
+            path: 001_create_security_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/001_create_security_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 7d2f0e6b-2c3c-4a2f-8d12-5d3b2d6b7c10
+      author: mvale
+      labels: "HU-05-dev,ddl,parameterization,core"
+      comment: "Creates parameterization tables in parameterization schema: client, company, legal_information, day_type, payment_method, price, and employee."
+      changes:
+        - sqlFile:
+            path: 002_create_parameterization_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/002_create_parameterization_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 5e1a9b2c-3d4e-4f5g-6h7i-8j9k0l1m2n3o
+      author: mvale
+      labels: "HU-06-dev,ddl,distribution,core"
+      comment: "Creates distribution tables in distribution schema: room_type, room_status, branch, and room."
+      changes:
+        - sqlFile:
+            path: 003_create_distribution_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/003_create_distribution_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 6f2b8c3d-4e5f-6g7h-8i9j-0k1l2m3n4o5p
+      author: mvale
+      labels: "HU-07-dev,ddl,inventory,core"
+      comment: "Creates inventory tables in inventory schema: provider, product, service, product_tracking, and inventory_availability."
+      changes:
+        - sqlFile:
+            path: 004_create_inventory_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/004_create_inventory_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: a1b2c3d4-e5f6-4789-9abc-def012345678
+      author: mvale
+      labels: "HU-08-dev,ddl,service_provision,core"
+      comment: "Creates service provision tables in service_provision schema: room reservation, cancellation, availability, catalog, check-in, check-out, stay, product sale, and service sale."
+      changes:
+        - sqlFile:
+            path: 005_create_service_provision_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/005_create_service_provision_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: b2c3d4e5-f6a7-4890-abcd-ef0123456789
+      author: mvale
+      labels: "HU-09-dev,ddl,bill,core"
+      comment: "Creates billing tables in bill schema: pre-invoice, payment, invoice, and invoice detail."
+      changes:
+        - sqlFile:
+            path: 006_create_bill_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/006_create_bill_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: c3d4e5f6-a7b8-4901-bcde-f0123456789a
+      author: mvale
+      labels: "HU-10-dev,ddl,notification,core"
+      comment: "Creates notification tables in notification schema: promotion, alert, terms and conditions, and customer loyalty."
+      changes:
+        - sqlFile:
+            path: 007_create_notification_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/007_create_notification_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: d4e5f6a7-b8c9-4a01-bcde-f123456789ab
+      author: mvale
+      labels: "HU-11-dev,ddl,maintenance,core"
+      comment: "Creates maintenance tables in maintenance schema: room_maintenance, maintenance_usage, maintenance_remodeling, and maintenance_dashboard."
+      changes:
+        - sqlFile:
+            path: 008_create_maintenance_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/008_create_maintenance_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false

@@ -1,0 +1,70 @@
+Starting seeds load: canonical -> volumetric -> smoke test
+Applying seed: 001_canonical_seeds.sql
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+Applying seed: 001_reference_data.sql
+Applying seed: 002_volumetric_seeds.sql
+INSERT 0 0
+DO
+Applying seed: 003_distribution_seeds.sql
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+Applying seed: 004_parameterization_canonical.sql
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+DO
+ERROR:  syntax error at or near "WHERE"
+LINE 7:     WHERE NOT EXISTS (SELECT 1 FROM parameterization.employe...
+            ^
+Applying seed: 005_parameterization_volumetric.sql
+INSERT 0 0
+Applying seed: 006_service_provision_canonical.sql
+DO
+Applying seed: 007_service_provision_volumetric.sql
+DO
+Applying seed: 008_billing_canonical.sql
+ERROR:  column "tax" of relation "pre_invoice" does not exist
+LINE 1: ...T INTO bill.pre_invoice (id, client_id, subtotal, tax, disco...
+                                                             ^
+QUERY:  INSERT INTO bill.pre_invoice (id, client_id, subtotal, tax, discount, total, created_by)
+    SELECT gen_random_uuid(), c.id, 0, 0, 0, 0, 'seed'
+    FROM parameterization.client c
+    WHERE NOT EXISTS (SELECT 1 FROM bill.pre_invoice)
+    LIMIT 1
+CONTEXT:  PL/pgSQL function inline_code_block line 4 at SQL statement
+Applying seed: 009_inventory_canonical.sql
+INSERT 0 0
+DO
+Applying seed: 010_inventory_volumetric.sql
+DO
+Applying seed: 011_notification_canonical.sql
+INSERT 0 1
+INSERT 0 1
+Applying seed: 012_security_canonical.sql
+INSERT 0 0
+DO
+Applying seed: 013_maintenance_canonical.sql
+ERROR:  null value in column "employee_id" of relation "room_maintenance" violates not-null constraint
+DETAIL:  Failing row contains (5efb3bb8-4e5e-4bc6-86c9-144deddd3ebe, 84012813-4604-4148-80de-9c739a2003f8, null, preventive, 2026-05-19 00:00:00+00, null, open, initial maintenance, seed, 2026-05-19 01:30:28.832265+00, null, null, null, null, active).
+CONTEXT:  SQL statement "INSERT INTO maintenance.room_maintenance (id, room_id, employee_id, maintenance_type, start_date, maintenance_status, observation, created_by)
+    SELECT gen_random_uuid(), r.id, NULL, 'preventive', CURRENT_DATE, 'open', 'initial maintenance', 'seed'
+    FROM distribution.room r
+    WHERE NOT EXISTS (SELECT 1 FROM maintenance.room_maintenance)
+    LIMIT 1"
+PL/pgSQL function inline_code_block line 4 at SQL statement
+Running smoke test...
+DO
+Seeds loaded and smoke test passed

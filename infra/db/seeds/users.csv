@@ -1,0 +1,3 @@
+username,password,roles,description
+ariel5253,ariel5253,ro_role;rw_role,Application user with DDL and DML permissions
+app_readonly,app_readonly_default_password,ro_role,Read-only application role for reporting
