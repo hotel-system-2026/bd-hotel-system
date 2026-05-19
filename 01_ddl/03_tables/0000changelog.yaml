@@ -89,3 +89,18 @@ databaseChangeLog:
             path: ../../05_rollbacks/01_ddl/03_tables/006_create_bill_tables.rollback.sql
             relativeToChangelogFile: true
             stripComments: false
+  - changeSet:
+      id: c3d4e5f6-a7b8-4901-bcde-f0123456789a
+      author: mvale
+      labels: "HU-10-dev,ddl,notification,core"
+      comment: "Creates notification tables in notification schema: promotion, alert, terms and conditions, and customer loyalty."
+      changes:
+        - sqlFile:
+            path: 007_create_notification_tables.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/007_create_notification_tables.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
